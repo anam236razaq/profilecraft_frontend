@@ -1,0 +1,1331 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Blog Portfolio</title>
+        <style>
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+            html {
+                scroll-behavior: smooth;
+            }
+            body {
+                font-family:
+                    "Segoe UI",
+                    -apple-system,
+                    BlinkMacSystemFont,
+                    sans-serif;
+                background: #fefce8;
+                color: #1c1917;
+                line-height: 1.6;
+            }
+
+            /* Header */
+            .header {
+                background: linear-gradient(135deg, #fb923c 0%, #f59e0b 100%);
+                padding: 0;
+                position: sticky;
+                top: 0;
+                z-index: 100;
+                box-shadow: 0 4px 20px rgba(251, 146, 60, 0.3);
+            }
+            .header-content {
+                width: 100%;
+                padding: 0 44px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                height: 72px;
+            }
+            .header-logo {
+                color: white;
+                font-size: 22px;
+                font-weight: 800;
+                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            }
+            .header-nav {
+                display: flex;
+                gap: 32px;
+            }
+            .header-nav a {
+                color: rgba(255, 255, 255, 0.9);
+                text-decoration: none;
+                font-size: 14px;
+                font-weight: 500;
+                transition: color 0.3s;
+            }
+            .header-nav a:hover {
+                color: #1c1917;
+            }
+            .header-contact {
+                background: white;
+                color: #fb923c;
+                padding: 10px 20px;
+                border-radius: 8px;
+                font-weight: 600;
+                font-size: 14px;
+                text-decoration: none;
+                transition: all 0.3s;
+            }
+            .header-contact:hover {
+                background: #fef3c7;
+                transform: translateY(-2px);
+            }
+
+            /* Hero */
+            .hero {
+                background: linear-gradient(135deg, #fb923c 0%, #f59e0b 100%);
+                padding: 80px 44px 60px;
+                position: relative;
+                overflow: hidden;
+            }
+            .hero::before {
+                content: "";
+                position: absolute;
+                top: -50%;
+                right: -20%;
+                width: 600px;
+                height: 600px;
+                background: radial-gradient(
+                    circle,
+                    rgba(255, 255, 255, 0.15) 0%,
+                    transparent 70%
+                );
+            }
+            .hero::after {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 80px;
+                background: linear-gradient(to top, #fefce8, transparent);
+            }
+            .hero-content {
+                width: 100%;
+                display: grid;
+                grid-template-columns: 1fr 300px;
+                gap: 60px;
+                align-items: center;
+                position: relative;
+                z-index: 1;
+            }
+            .hero-left {
+                color: white;
+            }
+            .hero-badge {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                background: rgba(255, 255, 255, 0.2);
+                padding: 8px 16px;
+                border-radius: 30px;
+                font-size: 13px;
+                color: white;
+                margin-bottom: 20px;
+                border: 1px solid rgba(255, 255, 255, 0.3);
+            }
+            .hero-badge .dot {
+                width: 8px;
+                height: 8px;
+                background: #22c55e;
+                border-radius: 50%;
+                animation: pulse 2s infinite;
+            }
+            .hero-name {
+                font-size: 48px;
+                font-weight: 800;
+                margin-bottom: 12px;
+                line-height: 1.1;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            }
+            .hero-title {
+                font-size: 22px;
+                color: rgba(255, 255, 255, 0.9);
+                margin-bottom: 20px;
+                font-weight: 400;
+            }
+            .hero-location {
+                font-size: 15px;
+                color: rgba(255, 255, 255, 0.8);
+                margin-bottom: 28px;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+            .hero-description {
+                font-size: 16px;
+                color: rgba(255, 255, 255, 0.9);
+                line-height: 1.8;
+                margin-bottom: 32px;
+                max-width: 540px;
+            }
+            .hero-actions {
+                display: flex;
+                gap: 16px;
+                flex-wrap: wrap;
+            }
+            .hero-btn {
+                padding: 14px 28px;
+                border-radius: 8px;
+                font-size: 15px;
+                font-weight: 600;
+                text-decoration: none;
+                transition: all 0.3s;
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+            }
+            .hero-btn.primary {
+                background: white;
+                color: #fb923c;
+            }
+            .hero-btn.primary:hover {
+                background: #fef3c7;
+                transform: translateY(-2px);
+            }
+            .hero-btn.secondary {
+                background: rgba(255, 255, 255, 0.1);
+                color: white;
+                border: 1px solid rgba(255, 255, 255, 0.3);
+            }
+            .hero-btn.secondary:hover {
+                background: rgba(255, 255, 255, 0.2);
+            }
+            .hero-right {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .hero-avatar-wrapper {
+                position: relative;
+                margin-bottom: 20px;
+            }
+            .hero-avatar {
+                width: 180px;
+                height: 180px;
+                border-radius: 20px;
+                object-fit: cover;
+                border: 4px solid rgba(255, 255, 255, 0.5);
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            }
+            .hero-status {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                background: rgba(255, 255, 255, 0.2);
+                padding: 10px 20px;
+                border-radius: 30px;
+                font-size: 13px;
+                color: white;
+                border: 1px solid rgba(255, 255, 255, 0.3);
+            }
+            .hero-status .dot {
+                width: 8px;
+                height: 8px;
+                background: #22c55e;
+                border-radius: 50%;
+                animation: pulse 2s infinite;
+            }
+            .hero-social {
+                display: flex;
+                gap: 12px;
+                margin-top: 16px;
+            }
+            .hero-social a {
+                width: 40px;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 10px;
+                color: white;
+                text-decoration: none;
+                transition: all 0.3s;
+                font-size: 16px;
+            }
+            .hero-social a:hover {
+                background: white;
+                color: #fb923c;
+                transform: translateY(-3px);
+            }
+
+            /* Stats Bar */
+            .stats-bar {
+                background: white;
+                padding: 32px 24px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+                position: relative;
+                z-index: 10;
+                margin-top: -40px;
+                max-width: 1000px;
+                margin-left: auto;
+                margin-right: auto;
+                border-radius: 16px;
+            }
+            .stats-grid {
+                max-width: 1200px;
+                margin: 0 auto;
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 32px;
+                text-align: center;
+            }
+            .stat-item {
+                padding: 0 16px;
+            }
+            .stat-number {
+                font-size: 36px;
+                font-weight: 800;
+                color: #fb923c;
+                margin-bottom: 4px;
+            }
+            .stat-label {
+                font-size: 14px;
+                color: #78716c;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+
+            /* Section Styles */
+            .section {
+                padding: 80px 44px;
+                width: 100%;
+            }
+            .section-header {
+                margin-bottom: 48px;
+            }
+            .section-label {
+                font-size: 13px;
+                color: #f59e0b;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                font-weight: 700;
+                margin-bottom: 8px;
+            }
+            .section-title {
+                font-size: 36px;
+                font-weight: 800;
+                color: #1c1917;
+            }
+            .section-divider {
+                width: 60px;
+                height: 4px;
+                background: linear-gradient(90deg, #fb923c, #f59e0b);
+                border-radius: 2px;
+                margin-top: 16px;
+            }
+
+            /* Blog List */
+            .blog-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 24px;
+            }
+            .blog-card {
+                background: white;
+                border-radius: 16px;
+                overflow: hidden;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+                border: 1px solid #fef3c7;
+                transition: all 0.3s;
+            }
+            .blog-card:hover {
+                transform: translateY(-8px);
+                box-shadow: 0 20px 50px rgba(251, 146, 60, 0.15);
+                border-color: #fb923c;
+            }
+            .blog-image {
+                width: 100%;
+                height: 180px;
+                object-fit: cover;
+            }
+            .blog-content {
+                padding: 24px;
+            }
+            .blog-date {
+                font-size: 12px;
+                color: #f59e0b;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                margin-bottom: 8px;
+            }
+            .blog-title {
+                font-size: 20px;
+                font-weight: 700;
+                color: #1c1917;
+                margin-bottom: 12px;
+                line-height: 1.3;
+            }
+            .blog-excerpt {
+                font-size: 14px;
+                color: #78716c;
+                line-height: 1.7;
+                margin-bottom: 16px;
+            }
+            .blog-link {
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                color: #fb923c;
+                font-weight: 600;
+                text-decoration: none;
+                font-size: 14px;
+                transition: gap 0.3s;
+            }
+            .blog-link:hover {
+                gap: 10px;
+            }
+
+            /* About Grid */
+            .about-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 60px;
+                align-items: start;
+            }
+            .about-main {
+                font-size: 16px;
+                line-height: 1.9;
+                color: #57534e;
+            }
+            .about-main p {
+                margin-bottom: 20px;
+            }
+            .about-sidebar {
+                background: linear-gradient(135deg, #fb923c 0%, #f59e0b 100%);
+                padding: 36px;
+                border-radius: 16px;
+                color: white;
+            }
+            .about-sidebar-title {
+                font-size: 18px;
+                font-weight: 700;
+                margin-bottom: 24px;
+            }
+            .info-row {
+                display: flex;
+                justify-content: space-between;
+                padding: 14px 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            }
+            .info-row:last-child {
+                border-bottom: none;
+            }
+            .info-label {
+                font-size: 13px;
+                color: rgba(255, 255, 255, 0.8);
+            }
+            .info-value {
+                font-size: 14px;
+                font-weight: 600;
+                color: white;
+            }
+
+            /* Skills */
+            .skills-container {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 16px;
+            }
+            .skill-category {
+                background: white;
+                padding: 28px;
+                border-radius: 12px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+                border: 1px solid #fef3c7;
+            }
+            .skill-category-title {
+                font-size: 16px;
+                font-weight: 700;
+                color: #1c1917;
+                margin-bottom: 16px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            .skill-category-title .icon {
+                font-size: 20px;
+            }
+            .skill-tags {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            .skill-tag {
+                padding: 6px 14px;
+                background: #fef3c7;
+                color: #b45309;
+                border-radius: 6px;
+                font-size: 13px;
+                font-weight: 500;
+                border: 1px solid #fde68a;
+                transition: all 0.3s;
+            }
+            .skill-tag:hover {
+                background: #fb923c;
+                color: white;
+                border-color: #fb923c;
+            }
+
+            /* Projects */
+            .projects-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 24px;
+            }
+            .project-card {
+                background: white;
+                padding: 32px;
+                border-radius: 16px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+                border: 1px solid #fef3c7;
+                transition: all 0.3s;
+            }
+            .project-card:hover {
+                transform: translateY(-6px);
+                border-color: #fb923c;
+                box-shadow: 0 20px 50px rgba(251, 146, 60, 0.15);
+            }
+            .project-header {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                margin-bottom: 16px;
+            }
+            .project-icon {
+                width: 48px;
+                height: 48px;
+                background: linear-gradient(135deg, #fb923c 0%, #f59e0b 100%);
+                border-radius: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 24px;
+            }
+            .project-title {
+                font-size: 20px;
+                font-weight: 700;
+                color: #1c1917;
+            }
+            .project-description {
+                font-size: 14px;
+                color: #78716c;
+                line-height: 1.7;
+                margin-bottom: 16px;
+            }
+            .project-tech {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+                margin-bottom: 16px;
+            }
+            .project-tech span {
+                padding: 4px 12px;
+                background: #fef3c7;
+                color: #b45309;
+                border-radius: 4px;
+                font-size: 12px;
+                font-weight: 600;
+            }
+            .project-link {
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                color: #fb923c;
+                font-weight: 600;
+                text-decoration: none;
+                font-size: 14px;
+            }
+            .project-link:hover {
+                gap: 10px;
+            }
+
+            /* Contact */
+            .contact-section {
+                background: linear-gradient(135deg, #fb923c 0%, #f59e0b 100%);
+                padding: 80px 24px;
+                text-align: center;
+                position: relative;
+                overflow: hidden;
+            }
+            .contact-section::before {
+                content: "";
+                position: absolute;
+                top: -50%;
+                left: -20%;
+                width: 600px;
+                height: 600px;
+                background: radial-gradient(
+                    circle,
+                    rgba(255, 255, 255, 0.1) 0%,
+                    transparent 70%
+                );
+            }
+            .contact-content {
+                max-width: 700px;
+                margin: 0 auto;
+                position: relative;
+                z-index: 1;
+            }
+            .contact-label {
+                font-size: 13px;
+                color: rgba(255, 255, 255, 0.9);
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                font-weight: 700;
+                margin-bottom: 8px;
+            }
+            .contact-title {
+                font-size: 42px;
+                font-weight: 800;
+                color: white;
+                margin-bottom: 16px;
+            }
+            .contact-text {
+                font-size: 17px;
+                color: rgba(255, 255, 255, 0.9);
+                margin-bottom: 36px;
+                line-height: 1.7;
+            }
+            .contact-buttons {
+                display: flex;
+                justify-content: center;
+                gap: 20px;
+                flex-wrap: wrap;
+            }
+            .contact-btn {
+                padding: 16px 36px;
+                border-radius: 10px;
+                font-size: 15px;
+                font-weight: 700;
+                text-decoration: none;
+                transition: all 0.3s;
+                display: inline-flex;
+                align-items: center;
+                gap: 10px;
+            }
+            .contact-btn.primary {
+                background: white;
+                color: #fb923c;
+            }
+            .contact-btn.primary:hover {
+                background: #fef3c7;
+                transform: translateY(-3px);
+            }
+            .contact-btn.secondary {
+                background: transparent;
+                color: white;
+                border: 2px solid rgba(255, 255, 255, 0.4);
+            }
+            .contact-btn.secondary:hover {
+                background: rgba(255, 255, 255, 0.1);
+                border-color: white;
+            }
+
+            /* Footer */
+            .footer {
+                background: #1c1917;
+                padding: 32px 24px;
+            }
+            .footer-content {
+                max-width: 1200px;
+                margin: 0 auto;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .footer-left {
+                color: rgba(255, 255, 255, 0.5);
+                font-size: 14px;
+            }
+            .footer-left a {
+                color: #fb923c;
+                text-decoration: none;
+            }
+            .footer-social {
+                display: flex;
+                gap: 12px;
+            }
+            .footer-social a {
+                width: 36px;
+                height: 36px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 8px;
+                color: white;
+                text-decoration: none;
+                transition: all 0.3s;
+                font-size: 14px;
+            }
+            .footer-social a:hover {
+                background: #fb923c;
+            }
+
+            /* Animations */
+            @keyframes pulse {
+                0%,
+                100% {
+                    opacity: 1;
+                }
+                50% {
+                    opacity: 0.5;
+                }
+            }
+
+            /* Responsive */
+            @media (max-width: 1024px) {
+                .hero-content {
+                    grid-template-columns: 1fr;
+                    text-align: center;
+                }
+                .hero-right {
+                    margin-top: 32px;
+                }
+                .hero-description {
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+                .hero-actions {
+                    justify-content: center;
+                }
+                .stats-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+                .about-grid {
+                    grid-template-columns: 1fr;
+                }
+                .skills-container {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+                .blog-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+                .projects-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+            @media (max-width: 640px) {
+                .header-nav {
+                    display: none;
+                }
+                .hero-name {
+                    font-size: 36px;
+                }
+                .section-title {
+                    font-size: 28px;
+                }
+                .contact-title {
+                    font-size: 32px;
+                }
+                .blog-grid {
+                    grid-template-columns: 1fr;
+                }
+                .skills-container {
+                    grid-template-columns: 1fr;
+                }
+                .footer-content {
+                    flex-direction: column;
+                    gap: 16px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="header-logo">BlogCraft<span>.</span></div>
+                <nav class="header-nav">
+                    <a href="#">About</a>
+                    <a href="#">Blog</a>
+                    <a href="#">Projects</a>
+                    <a href="#">Contact</a>
+                </nav>
+                <a
+                    href="#"
+                    data-field="email"
+                    data-demo="sarah@techwriter.dev"
+                    class="header-contact"
+                    >Contact Me</a
+                >
+            </div>
+        </header>
+
+        <!-- Hero -->
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-left">
+                    <div class="hero-badge">
+                        <span class="dot"></span>
+                        <span
+                            data-field="availability"
+                            data-demo="Open to writing opportunities"
+                            >Open to writing opportunities</span
+                        >
+                    </div>
+                    <h1
+                        class="hero-name"
+                        data-field="name"
+                        data-demo="Sarah Chen"
+                    >
+                        Sarah Chen
+                    </h1>
+                    <p
+                        class="hero-title"
+                        data-field="headline"
+                        data-demo="Technical Writer & Content Strategist"
+                    >
+                        Technical Writer & Content Strategist
+                    </p>
+                    <p class="hero-location">
+                        📍
+                        <span data-field="location" data-demo="Seattle, WA"
+                            >Seattle, WA</span
+                        >
+                    </p>
+                    <p
+                        class="hero-description"
+                        data-field="bio"
+                        data-demo="I transform complex technical concepts into clear, engaging content that helps readers understand and use technology effectively."
+                    >
+                        I transform complex technical concepts into clear,
+                        engaging content that helps readers understand and use
+                        technology effectively.
+                    </p>
+                    <div class="hero-actions">
+                        <a
+                            href="#"
+                            data-field="email"
+                            data-demo="sarah@techwriter.dev"
+                            class="hero-btn primary"
+                            >📧 Get In Touch</a
+                        >
+                        <a href="#" class="hero-btn secondary">Read My Blog</a>
+                    </div>
+                </div>
+                <div class="hero-right">
+                    <div class="hero-avatar-wrapper">
+                        <img
+                            data-field="avatar"
+                            data-demo="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&crop=faces"
+                            src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&crop=faces"
+                            alt="Profile"
+                            class="hero-avatar"
+                        />
+                    </div>
+                    <div class="hero-status">
+                        <span class="dot"></span>
+                        <span>Available for hire</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Bar -->
+        <div class="stats-bar">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div
+                        class="stat-number"
+                        data-field="experience"
+                        data-demo="6+"
+                    >
+                        6+
+                    </div>
+                    <div class="stat-label">Years Writing</div>
+                </div>
+                <div class="stat-item">
+                    <div
+                        class="stat-number"
+                        data-field="projects"
+                        data-demo="120+"
+                    >
+                        120+
+                    </div>
+                    <div class="stat-label">Articles</div>
+                </div>
+                <div class="stat-item">
+                    <div
+                        class="stat-number"
+                        data-field="followers"
+                        data-demo="15K"
+                    >
+                        15K
+                    </div>
+                    <div class="stat-label">Readers</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Clients</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Section -->
+        <section id="about" class="section">
+            <div class="section-header">
+                <div class="section-label">About Me</div>
+                <h2 class="section-title">Get to Know Me</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="about-grid">
+                <div class="about-main">
+                    <p
+                        data-field="bio"
+                        data-demo="I'm a technical writer and content strategist based in Seattle with a passion for making complex topics accessible. With over 6 years of experience in the tech industry, I've helped companies from startups to Fortune 500s communicate their message effectively."
+                    >
+                        I'm a technical writer and content strategist based in
+                        Seattle with a passion for making complex topics
+                        accessible. With over 6 years of experience in the tech
+                        industry, I've helped companies from startups to Fortune
+                        500s communicate their message effectively.
+                    </p>
+                    <p>
+                        My expertise spans API documentation, user guides, blog
+                        posts, and technical whitepapers. I believe that good
+                        documentation is the backbone of great products, and I'm
+                        dedicated to helping teams create content that users
+                        love.
+                    </p>
+                    <p>
+                        When I'm not writing, you'll find me exploring hiking
+                        trails in the Pacific Northwest, reading about the
+                        latest in AI technology, or experimenting with new
+                        documentation tools.
+                    </p>
+                </div>
+                <div class="about-sidebar">
+                    <div class="about-sidebar-title">Quick Info</div>
+                    <div class="info-row">
+                        <span class="info-label">Email</span>
+                        <span
+                            class="info-value"
+                            data-field="email"
+                            data-demo="sarah@techwriter.dev"
+                            >sarah@techwriter.dev</span
+                        >
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Phone</span>
+                        <span
+                            class="info-value"
+                            data-field="phone"
+                            data-demo="+1 (206) 555-0142"
+                            >+1 (206) 555-0142</span
+                        >
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Website</span>
+                        <span
+                            class="info-value"
+                            data-field="website"
+                            data-demo="sarahchen.dev"
+                            >sarahchen.dev</span
+                        >
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Company</span>
+                        <span
+                            class="info-value"
+                            data-field="company"
+                            data-demo="TechDocs Inc."
+                            >TechDocs Inc.</span
+                        >
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Section -->
+        <section id="blog" class="section" style="background: #fffbeb">
+            <div style="width: 100%">
+                <div class="section-header">
+                    <div class="section-label">Blog</div>
+                    <h2 class="section-title">Latest Articles</h2>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="blog-grid">
+                    <div
+                        class="blog-card"
+                        data-field="projects"
+                        data-demo-index="0"
+                    >
+                        <img
+                            data-field="projects[0].image"
+                            data-demo="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=200&fit=crop"
+                            src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=200&fit=crop"
+                            alt="Blog"
+                            class="blog-image"
+                        />
+                        <div class="blog-content">
+                            <div
+                                class="blog-date"
+                                data-field="projects[0].date"
+                                data-demo="Mar 15, 2024"
+                            >
+                                Mar 15, 2024
+                            </div>
+                            <h3
+                                class="blog-title"
+                                data-field="projects[0].title"
+                                data-demo="The Complete Guide to API Documentation"
+                            >
+                                The Complete Guide to API Documentation
+                            </h3>
+                            <p
+                                class="blog-excerpt"
+                                data-field="projects[0].description"
+                                data-demo="Learn the best practices for writing clear, comprehensive API documentation that developers actually want to use."
+                            >
+                                Learn the best practices for writing clear,
+                                comprehensive API documentation that developers
+                                actually want to use.
+                            </p>
+                            <a
+                                href="#"
+                                data-field="projects[0].url"
+                                data-demo="https://sarahchen.dev/blog/api-docs"
+                                class="blog-link"
+                                >Read More →</a
+                            >
+                        </div>
+                    </div>
+                    <div
+                        class="blog-card"
+                        data-field="projects"
+                        data-demo-index="1"
+                    >
+                        <img
+                            data-field="projects[1].image"
+                            data-demo="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=200&fit=crop"
+                            src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=200&fit=crop"
+                            alt="Blog"
+                            class="blog-image"
+                        />
+                        <div class="blog-content">
+                            <div
+                                class="blog-date"
+                                data-field="projects[1].date"
+                                data-demo="Feb 28, 2024"
+                            >
+                                Feb 28, 2024
+                            </div>
+                            <h3
+                                class="blog-title"
+                                data-field="projects[1].title"
+                                data-demo="10 Tips for Technical Writing Success"
+                            >
+                                10 Tips for Technical Writing Success
+                            </h3>
+                            <p
+                                class="blog-excerpt"
+                                data-field="projects[1].description"
+                                data-demo="Discover proven strategies for creating documentation that is clear, engaging, and helps users accomplish their goals."
+                            >
+                                Discover proven strategies for creating
+                                documentation that is clear, engaging, and helps
+                                users accomplish their goals.
+                            </p>
+                            <a
+                                href="#"
+                                data-field="projects[1].url"
+                                data-demo="https://sarahchen.dev/blog/tech-writing-tips"
+                                class="blog-link"
+                                >Read More →</a
+                            >
+                        </div>
+                    </div>
+                    <div
+                        class="blog-card"
+                        data-field="projects"
+                        data-demo-index="2"
+                    >
+                        <img
+                            data-field="projects[2].image"
+                            data-demo="https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=400&h=200&fit=crop"
+                            src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=400&h=200&fit=crop"
+                            alt="Blog"
+                            class="blog-image"
+                        />
+                        <div class="blog-content">
+                            <div
+                                class="blog-date"
+                                data-field="projects[2].date"
+                                data-demo="Jan 15, 2024"
+                            >
+                                Jan 15, 2024
+                            </div>
+                            <h3
+                                class="blog-title"
+                                data-field="projects[2].title"
+                                data-demo="Understanding Developer Experience (DX)"
+                            >
+                                Understanding Developer Experience (DX)
+                            </h3>
+                            <p
+                                class="blog-excerpt"
+                                data-field="projects[2].description"
+                                data-demo="Explore how developer experience impacts the success of your documentation and overall product adoption."
+                            >
+                                Explore how developer experience impacts the
+                                success of your documentation and overall
+                                product adoption.
+                            </p>
+                            <a
+                                href="#"
+                                data-field="projects[2].url"
+                                data-demo="https://sarahchen.dev/blog/developer-experience"
+                                class="blog-link"
+                                >Read More →</a
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-label">Skills</div>
+                <h2 class="section-title">Technical Expertise</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <div class="skill-category-title">
+                        <span class="icon">✍️</span> Writing
+                    </div>
+                    <div class="skill-tags">
+                        <span
+                            data-field="skills"
+                            data-demo="Technical Writing"
+                            class="skill-tag"
+                            >Technical Writing</span
+                        >
+                        <span
+                            data-field="skills"
+                            data-demo="API Documentation"
+                            class="skill-tag"
+                            >API Documentation</span
+                        >
+                        <span
+                            data-field="skills"
+                            data-demo="User Guides"
+                            class="skill-tag"
+                            >User Guides</span
+                        >
+                        <span
+                            data-field="skills"
+                            data-demo="Copywriting"
+                            class="skill-tag"
+                            >Copywriting</span
+                        >
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-category-title">
+                        <span class="icon">🛠️</span> Tools
+                    </div>
+                    <div class="skill-tags">
+                        <span
+                            data-field="skills"
+                            data-demo="Markdown"
+                            class="skill-tag"
+                            >Markdown</span
+                        >
+                        <span
+                            data-field="skills"
+                            data-demo="Git"
+                            class="skill-tag"
+                            >Git</span
+                        >
+                        <span
+                            data-field="skills"
+                            data-demo="OpenAPI"
+                            class="skill-tag"
+                            >OpenAPI</span
+                        >
+                        <span
+                            data-field="skills"
+                            data-demo="Confluence"
+                            class="skill-tag"
+                            >Confluence</span
+                        >
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-category-title">
+                        <span class="icon">💻</span> Technical
+                    </div>
+                    <div class="skill-tags">
+                        <span
+                            data-field="skills"
+                            data-demo="JavaScript"
+                            class="skill-tag"
+                            >JavaScript</span
+                        >
+                        <span
+                            data-field="skills"
+                            data-demo="Python"
+                            class="skill-tag"
+                            >Python</span
+                        >
+                        <span
+                            data-field="skills"
+                            data-demo="REST APIs"
+                            class="skill-tag"
+                            >REST APIs</span
+                        >
+                        <span
+                            data-field="skills"
+                            data-demo="GraphQL"
+                            class="skill-tag"
+                            >GraphQL</span
+                        >
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section" style="background: #fffbeb">
+            <div style="width: 100%">
+                <div class="section-header">
+                    <div class="section-label">Portfolio</div>
+                    <h2 class="section-title">Featured Projects</h2>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div class="project-icon">📚</div>
+                            <h3
+                                class="project-title"
+                                data-field="projects[3].title"
+                                data-demo="Developer Portal Overhaul"
+                            >
+                                Developer Portal Overhaul
+                            </h3>
+                        </div>
+                        <p
+                            class="project-description"
+                            data-field="projects[3].description"
+                            data-demo="Led the complete redesign of a developer portal serving 50K+ monthly users, improving findability by 60%."
+                        >
+                            Led the complete redesign of a developer portal
+                            serving 50K+ monthly users, improving findability by
+                            60%.
+                        </p>
+                        <div class="project-tech">
+                            <span
+                                data-field="projects[3].language"
+                                data-demo="Docsify"
+                                >Docsify</span
+                            >
+                            <span
+                                data-field="projects[3].tech"
+                                data-demo="OpenAPI"
+                                >OpenAPI</span
+                            >
+                        </div>
+                        <a
+                            href="#"
+                            data-field="projects[3].url"
+                            data-demo="https://sarahchen.dev/portfolio/developer-portal"
+                            class="project-link"
+                            >View Project →</a
+                        >
+                    </div>
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div class="project-icon">📖</div>
+                            <h3
+                                class="project-title"
+                                data-field="projects[4].title"
+                                data-demo="SDK Documentation Suite"
+                            >
+                                SDK Documentation Suite
+                            </h3>
+                        </div>
+                        <p
+                            class="project-description"
+                            data-field="projects[4].description"
+                            data-demo="Created comprehensive documentation for a multi-language SDK used by thousands of developers worldwide."
+                        >
+                            Created comprehensive documentation for a
+                            multi-language SDK used by thousands of developers
+                            worldwide.
+                        </p>
+                        <div class="project-tech">
+                            <span
+                                data-field="projects[4].language"
+                                data-demo="TypeScript"
+                                >TypeScript</span
+                            >
+                            <span
+                                data-field="projects[4].tech"
+                                data-demo="Python"
+                                >Python</span
+                            >
+                        </div>
+                        <a
+                            href="#"
+                            data-field="projects[4].url"
+                            data-demo="https://sarahchen.dev/portfolio/sdk-docs"
+                            class="project-link"
+                            >View Project →</a
+                        >
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section">
+            <div class="contact-content">
+                <div class="contact-label">Contact</div>
+                <h2 class="contact-title">Let's Work Together</h2>
+                <p class="contact-text">
+                    I'm always open to discussing new projects, creative ideas,
+                    or opportunities to be part of your vision.
+                </p>
+                <div class="contact-buttons">
+                    <a
+                        href="#"
+                        data-field="email"
+                        data-demo="sarah@techwriter.dev"
+                        class="contact-btn primary"
+                        >📧 Email Me</a
+                    >
+                    <a
+                        href="#"
+                        data-field="linkedin"
+                        data-demo="https://linkedin.com/in/sarahchen"
+                        class="contact-btn secondary"
+                        target="_blank"
+                        >💼 LinkedIn</a
+                    >
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-left">
+                    © 2026 <a href="#">ProfileCraft</a>. All rights reserved.
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>
