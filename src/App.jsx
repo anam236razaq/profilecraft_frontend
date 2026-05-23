@@ -52,17 +52,9 @@ function AppRoutes() {
 
   return (
     <Routes>
-      {/* Redirect authenticated admins from home to admin dashboard */}
-      <Route
-        path="/"
-        element={
-          isAuthenticated && isAdmin ? (
-            <Navigate to="/admin" />
-          ) : (
-            <Home />
-          )
-        }
-      />
+      {/* Home page - always public, shows to everyone */}
+      <Route path="/" element={<Home />} />
+
       <Route
         path="/login"
         element={isAuthenticated ? <Navigate to={getHomeRoute()} /> : <Login />}

@@ -317,7 +317,8 @@ const Home = () => {
                         {template.name}
                       </h3>
                       <p className="text-sm text-gray-500 mt-1">
-                        {template.description || "No description available"}
+                        {(template.description || "No description available").slice(0, 100)}
+                        {(template.description || "").length > 100 ? "..." : ""}
                       </p>
                       <span className="inline-block mt-3 px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-full capitalize">
                         {template.category || "general"}
