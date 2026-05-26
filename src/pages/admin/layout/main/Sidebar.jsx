@@ -72,7 +72,7 @@ const Sidebar = () => {
       } ${
         isMobileOpen
           ? "translate-x-0 w-64 rounded-none z-1100 h-[calc(100vh-4rem)]"
-          : "-translate-x-full z-1000 h-[calc(100vh-4rem)] lg:translate-x-0 lg:h-screen"
+          : "-translate-x-full z-1050 h-[calc(100vh-4rem)] lg:translate-x-0 lg:h-screen lg:z-1100"
       }`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
