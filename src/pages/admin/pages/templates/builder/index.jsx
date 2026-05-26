@@ -507,7 +507,7 @@ const TemplateBuilder = () => {
       </div>
 
       {/* EDITOR */}
-      <div className="flex-1 min-h-0 z-1200">
+      <div className="flex-1 min-h-0 z-30 lg:z-1200">
         <div ref={containerRef} className="h-full w-full" />
       </div>
     </div>

@@ -1,5 +1,23 @@
 ﻿import { NextIcon, PrevIcon } from "../assets/icons";
 
+const SkeletonPagination = () => (
+  <nav className="flex justify-between items-center gap-x-2">
+    <div className="flex items-center gap-2 px-3 py-2">
+      <div className="w-16 h-4 bg-gray-200 rounded animate-pulse" />
+    </div>
+    <div className="flex items-center gap-x-1">
+      {[1, 2, 3, 4, 5].map((i) => (
+        <div key={i} className="min-w-9 min-h-9 px-3 py-2">
+          <div className="w-full h-full bg-gray-200 rounded-lg animate-pulse" />
+        </div>
+      ))}
+    </div>
+    <div className="flex items-center gap-2 px-3 py-2">
+      <div className="w-12 h-4 bg-gray-200 rounded animate-pulse" />
+    </div>
+  </nav>
+);
+
 const Pagination = ({
   currentPage,
   totalPages,
@@ -7,7 +25,7 @@ const Pagination = ({
   isLoading = false,
 }) => {
   if (isLoading) {
-    return <div className="py-5 text-center text-gray-400">Loading...</div>;
+    return <SkeletonPagination />;
   }
 
   const handlePrevious = () => {
