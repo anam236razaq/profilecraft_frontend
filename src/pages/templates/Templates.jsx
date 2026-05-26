@@ -48,17 +48,11 @@ const Templates = () => {
   }, [search, page, selectedCategory]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      await fetchTemplates();
-    };
-    fetchData();
+    const debounceTimer = setTimeout(() => {
+      fetchTemplates();
+    }, 300);
+    return () => clearTimeout(debounceTimer);
   }, [fetchTemplates]);
-
-  const handleSearch = (e) => {
-    e.preventDefault();
-    setPage(1);
-    fetchTemplates();
-  };
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
@@ -103,24 +97,19 @@ const Templates = () => {
               Choose from our collection of beautiful templates
             </p>
           </div>
-          <form onSubmit={handleSearch} className="flex gap-2">
-            <div className="relative">
+          <div className="relative">
               <input
                 type="text"
                 value={search}
-                onChange={(e) => setSearch(e.target.value)}
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                  setPage(1);
+                }}
                 placeholder="Search templates..."
                 className="w-full md:w-80 px-4 py-2 pl-10 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"
               />
               <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
             </div>
-            <button
-              type="submit"
-              className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition"
-            >
-              Search
-            </button>
-          </form>
         </div>
 
         {/* Category Filter */}
