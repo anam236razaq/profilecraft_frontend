@@ -5,7 +5,8 @@ import { authAPI } from "../../../../api/auth";
 
 const SettingsForm = ({ containerClassName = "" }) => {
   const { user, setUser } = useAuth();
-  const [loading, setLoading] = useState(false);
+  const [profileLoading, setProfileLoading] = useState(false);
+  const [passwordLoading, setPasswordLoading] = useState(false);
 
   const [profile, setProfile] = useState({
     name: user?.full_name || "",
@@ -35,7 +36,7 @@ const SettingsForm = ({ containerClassName = "" }) => {
 
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    setProfileLoading(true);
     try {
       const formData = new FormData();
       formData.append("full_name", profile.name);
@@ -59,7 +60,7 @@ const SettingsForm = ({ containerClassName = "" }) => {
         toast.error(errorMessage);
       }
     } finally {
-      setLoading(false);
+      setProfileLoading(false);
     }
   };
 
@@ -69,7 +70,7 @@ const SettingsForm = ({ containerClassName = "" }) => {
       toast.error("Password must be at least 6 characters");
       return;
     }
-    setLoading(true);
+    setPasswordLoading(true);
     try {
       await authAPI.updatePassword({
         current_password: passwords.currentPassword,
@@ -80,7 +81,7 @@ const SettingsForm = ({ containerClassName = "" }) => {
     } catch (err) {
       toast.error(err.response?.data?.message || "Failed to update password");
     } finally {
-      setLoading(false);
+      setPasswordLoading(false);
     }
   };
 
@@ -171,9 +172,9 @@ const SettingsForm = ({ containerClassName = "" }) => {
                   <button
                     className="px-6 py-2 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition-colors disabled:opacity-50"
                     type="submit"
-                    disabled={loading}
+                    disabled={profileLoading}
                   >
-                    {loading ? "Updating..." : "Update Profile"}
+                    {profileLoading ? "Updating..." : "Update Profile"}
                   </button>
                 </div>
               </form>
@@ -217,9 +218,9 @@ const SettingsForm = ({ containerClassName = "" }) => {
                   <button
                     className="px-6 py-2 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition-colors disabled:opacity-50"
                     type="submit"
-                    disabled={loading}
+                    disabled={passwordLoading}
                   >
-                    {loading ? "Updating..." : "Update Password"}
+                    {passwordLoading ? "Updating..." : "Update Password"}
                   </button>
                 </div>
               </form>

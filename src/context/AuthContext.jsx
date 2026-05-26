@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import authAPI from "../api/auth";
 
 const AuthContext = createContext(null);
@@ -7,9 +8,9 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Check if user is logged in on mount
     const token = localStorage.getItem("token");
     if (token) {
       fetchUser();
@@ -23,6 +24,14 @@ export const AuthProvider = ({ children }) => {
       const response = await authAPI.getMe();
       setUser(response.data.data);
     } catch (err) {
+      const errorCode = err.response?.data?.error;
+      if (errorCode === "ACCOUNT_DEACTIVATED") {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        setUser(null);
+        navigate("/login", { state: { message: "Your account has been deactivated." } });
+        return;
+      }
       localStorage.removeItem("token");
       localStorage.removeItem("user");
     } finally {
