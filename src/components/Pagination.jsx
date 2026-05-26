@@ -2,7 +2,7 @@
 
 const SkeletonPagination = () => (
   <nav className="flex justify-between items-center gap-x-2">
-    <div className="flex items-center gap-2 px-3 py-2">
+    <div className="flex items-center gap-2 px-3 py-2 rounded-lg">
       <div className="w-16 h-4 bg-gray-200 rounded animate-pulse" />
     </div>
     <div className="flex items-center gap-x-1">
@@ -13,7 +13,7 @@ const SkeletonPagination = () => (
         />
       ))}
     </div>
-    <div className="flex items-center gap-2 px-3 py-2">
+    <div className="flex items-center gap-2 px-3 py-2 rounded-lg">
       <div className="w-12 h-4 bg-gray-200 rounded animate-pulse" />
     </div>
   </nav>

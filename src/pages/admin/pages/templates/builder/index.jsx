@@ -304,13 +304,13 @@ const TemplateBuilder = () => {
 
         // Ensure sidebar is open
         const sidebar = editor.Panels.getPanel("views");
-        if (sidebar && typeof sidebar.open === "function") {
+        if (sidebar) {
           sidebar.open();
         }
 
         // Open block manager
         const blockPanel = editor.Panels.getPanel("block-manager");
-        if (blockPanel && typeof blockPanel.open === "function") {
+        if (blockPanel) {
           blockPanel.open();
         }
       });
@@ -507,7 +507,7 @@ const TemplateBuilder = () => {
       </div>
 
       {/* EDITOR */}
-      <div className="flex-1 min-h-0 z-1075 lg:z-1200">
+      <div className="flex-1 min-h-0 z-1080 lg:z-1200">
         <div ref={containerRef} className="h-full w-full" />
       </div>
     </div>
