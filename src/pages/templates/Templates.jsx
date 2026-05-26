@@ -36,10 +36,12 @@ const Templates = () => {
         per_page: 12,
         category: selectedCategory,
       });
-      const result = response.data.data;
-      setTemplates(result.data || []);
-      setTotal(result.total || 0);
-      setTotalPages(result.total_pages || 1);
+      const result = response?.data?.data;
+      if (result) {
+        setTemplates(result.data || []);
+        setTotal(result.total || 0);
+        setTotalPages(result.total_pages || 1);
+      }
     } catch (err) {
       console.error("Failed to fetch templates", err);
     } finally {
