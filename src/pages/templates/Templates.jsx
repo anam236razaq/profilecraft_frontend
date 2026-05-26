@@ -4,6 +4,7 @@ import templatesAPI from "../../api/templates";
 import Pagination from "../../components/Pagination";
 import { SearchIcon } from "../../assets/icons";
 import { useAuth } from "../../context/AuthContext";
+import { SkeletonCard } from "../../components/Skeleton";
 
 const Templates = () => {
   const navigate = useNavigate();
@@ -146,7 +147,14 @@ const Templates = () => {
 
         {/* Templates Grid */}
         {loading ? (
-          <div className="text-center py-12 text-gray-500">Loading...</div>
+          <div className="grid md:grid-cols-3 gap-6">
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+          </div>
         ) : (
           <div className="grid md:grid-cols-3 gap-6">
             {filteredTemplates.map((template) => (

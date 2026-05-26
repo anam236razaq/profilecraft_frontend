@@ -2,6 +2,7 @@ import { useEffect, useState, useCallback } from "react";
 import usersAPI from "../../../../api/users";
 import { toast } from "react-toastify";
 import Pagination from "../../../../components/Pagination";
+import { SkeletonText } from "../../../../components/Skeleton";
 
 const AdminUsers = () => {
   const [users, setUsers] = useState([]);
@@ -144,8 +145,10 @@ const AdminUsers = () => {
               {loading ? (
                 <tr>
                   <td colSpan={5} className="text-center py-12">
-                    <div className="inline-block w-8 h-8 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
-                    <p className="text-gray-500 mt-3">Loading...</p>
+                    <div className="space-y-2">
+                      <SkeletonText lines={1} className="w-48 mx-auto" />
+                      <SkeletonText lines={1} className="w-32 mx-auto" />
+                    </div>
                   </td>
                 </tr>
               ) : users.length > 0 ? (

@@ -4,6 +4,7 @@ import { ToastProvider } from "./context/ToastContext";
 import MainLayout from "./pages/admin/layout/main";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import { SkeletonPage } from "./components/Skeleton";
 
 // Pages
 import Home from "./pages/Home";
@@ -37,11 +38,7 @@ function AppRoutes() {
   const { isAuthenticated, loading, isAdmin } = useAuth();
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-lg text-gray-500">Loading...</div>
-      </div>
-    );
+    return <SkeletonPage />;
   }
 
   // Determine redirect path based on user type

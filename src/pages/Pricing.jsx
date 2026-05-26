@@ -12,6 +12,7 @@ const Pricing = () => {
   const [loadingPlanId, setLoadingPlanId] = useState(null);
   const [currentPlan, setCurrentPlan] = useState(null);
   const [plans, setPlans] = useState([]);
+  const [plansLoading, setPlansLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showCancelDialog, setShowCancelDialog] = useState(false);
 
@@ -19,53 +20,9 @@ const Pricing = () => {
   const planParam = searchParams.get("plan");
   const canceled = searchParams.get("canceled");
 
-  // Fallback plans in case API fails
-  const FALLBACK_PLANS = [
-    {
-      id: "basic",
-      name: "Basic",
-      description: "Perfect to get started",
-      price: 0,
-      features: [
-        "1 Website",
-        "Basic Templates",
-        "500MB Storage",
-        "Basic Analytics",
-      ],
-      limits: { websites: 1, premium_templates: false, custom_domain: false },
-    },
-    {
-      id: "pro",
-      name: "Pro",
-      description: "Best for professionals",
-      price: 1500,
-      features: [
-        "5 Websites",
-        "All Premium Templates",
-        "5GB Storage",
-        "Custom Domain",
-        "Priority Support",
-      ],
-      limits: { websites: 5, premium_templates: true, custom_domain: true },
-    },
-    {
-      id: "enterprise",
-      name: "Enterprise",
-      description: "For agencies and teams",
-      price: 4900,
-      features: [
-        "Unlimited Websites",
-        "50GB Storage",
-        "Advanced Analytics",
-        "API Access",
-        "Dedicated Support",
-      ],
-      limits: { websites: -1, premium_templates: true, custom_domain: true },
-    },
-  ];
-
   const fetchPlans = useCallback(async () => {
     try {
+      setPlansLoading(true);
       const response = await stripeAPI.getPlans();
       if (response && response.success && response.data?.plans) {
         setPlans(response.data.plans);
@@ -75,7 +32,7 @@ const Pricing = () => {
         setError(null);
       } else {
         setError(response?.message || "Failed to load plans");
-        setPlans(FALLBACK_PLANS);
+        setPlans([]);
       }
     } catch (err) {
       console.error("Error response:", err.response);
@@ -97,7 +54,9 @@ const Pricing = () => {
       }
       console.error("Final error message:", errorMsg);
       setError(errorMsg);
-      setPlans(FALLBACK_PLANS);
+      setPlans([]);
+    } finally {
+      setPlansLoading(false);
     }
   }, []);
 
@@ -238,9 +197,13 @@ const Pricing = () => {
 
       {/* Pricing Cards */}
       <div className="max-w-7xl mx-auto px-4 pb-20">
-        {plans.length === 0 ? (
+        {plansLoading ? (
+          <div className="flex justify-center py-12">
+            <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin" />
+          </div>
+        ) : plans.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-gray-500">Loading plans...</p>
+            <p className="text-gray-500">No plans available</p>
           </div>
         ) : (
           <div className="grid md:grid-cols-3 gap-8">

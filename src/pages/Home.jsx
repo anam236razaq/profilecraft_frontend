@@ -11,6 +11,7 @@ import {
   PhoneIcon,
 } from "../assets/icons";
 import templatesAPI from "../api/templates";
+import { SkeletonCard } from "../components/Skeleton";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -282,9 +283,11 @@ const Home = () => {
 
             <div className="grid md:grid-cols-3 gap-6">
               {loading ? (
-                <p className="text-gray-500 col-span-3 text-center py-8">
-                  Loading templates...
-                </p>
+                <>
+                  <SkeletonCard />
+                  <SkeletonCard />
+                  <SkeletonCard />
+                </>
               ) : templates.length > 0 ? (
                 templates.slice(0, 3).map((template) => (
                   <div

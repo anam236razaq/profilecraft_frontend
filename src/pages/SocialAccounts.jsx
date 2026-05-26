@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import socialAPI from "../api/social";
 import { toast } from "react-toastify";
+import { SkeletonText } from "../components/Skeleton";
 import {
   GitHubIcon,
   LinkedInIcon,
@@ -204,7 +205,11 @@ const SocialAccounts = () => {
             Your Connected Accounts
           </h2>
           {loading ? (
-            <div className="text-center py-8 text-gray-500">Loading...</div>
+            <div className="space-y-4">
+              <SkeletonText lines={2} />
+              <SkeletonText lines={2} />
+              <SkeletonText lines={2} />
+            </div>
           ) : accounts.filter((a) => a.is_connected).length === 0 ? (
             <div className="text-center py-8">
               <div className="text-4xl mb-3">
