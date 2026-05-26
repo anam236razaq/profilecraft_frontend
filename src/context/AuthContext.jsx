@@ -39,6 +39,29 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // Periodic check for account deactivation (every 10 seconds)
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
+    const checkAccountStatus = async () => {
+      try {
+        await authAPI.getMe();
+      } catch (err) {
+        const errorCode = err.response?.data?.error;
+        if (errorCode === "ACCOUNT_DEACTIVATED") {
+          localStorage.removeItem("token");
+          localStorage.removeItem("user");
+          setUser(null);
+          navigate("/login", { state: { message: "Your account has been deactivated." } });
+        }
+      }
+    };
+
+    const interval = setInterval(checkAccountStatus, 10000); // Check every 10 seconds
+    return () => clearInterval(interval);
+  }, [navigate]);
+
   const login = async (email, password) => {
     try {
       setError(null);
