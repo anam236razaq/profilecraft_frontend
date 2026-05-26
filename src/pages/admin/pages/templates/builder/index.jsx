@@ -304,13 +304,13 @@ const TemplateBuilder = () => {
 
         // Ensure sidebar is open
         const sidebar = editor.Panels.getPanel("views");
-        if (sidebar) {
+        if (sidebar && typeof sidebar.open === "function") {
           sidebar.open();
         }
 
         // Open block manager
         const blockPanel = editor.Panels.getPanel("block-manager");
-        if (blockPanel) {
+        if (blockPanel && typeof blockPanel.open === "function") {
           blockPanel.open();
         }
       });
