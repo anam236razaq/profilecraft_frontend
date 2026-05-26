@@ -51,7 +51,7 @@ export const SkeletonTableRow = () => (
 
 export const SkeletonPage = () => (
   <div className="min-h-screen flex items-center justify-center">
-    <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin" />
+    <div className="w-12 h-12 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin" />
   </div>
 );
 
