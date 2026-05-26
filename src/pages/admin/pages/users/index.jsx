@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback } from "react";
 import usersAPI from "../../../../api/users";
 import { toast } from "react-toastify";
 import Pagination from "../../../../components/Pagination";
-import { SkeletonText } from "../../../../components/Skeleton";
+import { SkeletonTableRow } from "../../../../components/Skeleton";
 
 const AdminUsers = () => {
   const [users, setUsers] = useState([]);
@@ -143,14 +143,13 @@ const AdminUsers = () => {
             </thead>
             <tbody className="text-gray-700">
               {loading ? (
-                <tr>
-                  <td colSpan={5} className="text-center py-12">
-                    <div className="space-y-2">
-                      <SkeletonText lines={1} className="w-48 mx-auto" />
-                      <SkeletonText lines={1} className="w-32 mx-auto" />
-                    </div>
-                  </td>
-                </tr>
+                <>
+                  <SkeletonTableRow />
+                  <SkeletonTableRow />
+                  <SkeletonTableRow />
+                  <SkeletonTableRow />
+                  <SkeletonTableRow />
+                </>
               ) : users.length > 0 ? (
                 users.map((u) => (
                   <tr

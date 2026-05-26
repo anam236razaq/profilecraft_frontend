@@ -26,6 +26,29 @@ export const SkeletonText = ({ lines = 3, className = "" }) => (
   </div>
 );
 
+export const SkeletonTableRow = () => (
+  <tr className="border-b border-gray-200">
+    <td className="py-3 px-4">
+      <div className="flex items-center gap-3">
+        <Skeleton className="w-10 h-10 rounded-full" />
+        <Skeleton className="h-4 w-32" />
+      </div>
+    </td>
+    <td className="py-3 px-4">
+      <Skeleton className="h-4 w-48" />
+    </td>
+    <td className="py-3 px-4">
+      <Skeleton className="h-5 w-16 rounded-full" />
+    </td>
+    <td className="py-3 px-4">
+      <Skeleton className="h-4 w-24" />
+    </td>
+    <td className="py-3 px-4 text-center">
+      <Skeleton className="h-8 w-20 rounded-lg mx-auto" />
+    </td>
+  </tr>
+);
+
 export const SkeletonPage = () => (
   <div className="min-h-screen flex items-center justify-center">
     <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin" />
