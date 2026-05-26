@@ -9,10 +9,8 @@ const SkeletonPagination = () => (
       {[1, 2, 3].map((i) => (
         <div
           key={i}
-          className="min-w-9 min-h-9 flex items-center justify-center px-3 py-2"
-        >
-          <div className="w-full h-full bg-gray-200 rounded-lg animate-pulse" />
-        </div>
+          className="min-w-9 min-h-9 px-3 py-2 bg-gray-200 rounded-lg animate-pulse"
+        />
       ))}
     </div>
     <div className="flex items-center gap-2 px-3 py-2">
