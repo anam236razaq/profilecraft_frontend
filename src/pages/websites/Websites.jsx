@@ -87,15 +87,9 @@ const Websites = () => {
             <h3 className="text-lg font-medium text-gray-900 mb-1">
               No websites yet
             </h3>
-            <p className="text-gray-500 mb-4">
+            <p className="text-gray-500">
               Create your first website to get started
             </p>
-            <Link
-              to="/websites/new"
-              className="px-4 py-2 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition"
-            >
-              Create Website
-            </Link>
           </div>
         ) : (
           <div className="space-y-4">

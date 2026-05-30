@@ -188,9 +188,13 @@ const AdminTemplates = () => {
                     <button
                       onClick={() => openDeleteModal(template.id)}
                       disabled={deleting === template.id}
-                      className="text-sm text-red-600 hover:text-red-700 font-medium disabled:opacity-50"
+                      className="text-sm text-red-600 hover:text-red-700 font-medium disabled:opacity-50 flex items-center gap-1"
                     >
-                      {deleting === template.id ? "..." : "Delete"}
+                      {deleting === template.id ? (
+                        <div className="w-3.5 h-3.5 border-2 border-red-600 border-t-transparent rounded-full animate-spin" />
+                      ) : (
+                        "Delete"
+                      )}
                     </button>
                   </div>
                 </div>
@@ -246,9 +250,16 @@ const AdminTemplates = () => {
               <button
                 onClick={handleDeleteTemplate}
                 disabled={deleting}
-                className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 disabled:opacity-50"
+                className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 disabled:opacity-50 flex items-center justify-center gap-2"
               >
-                {deleting ? "Deleting..." : "Delete"}
+                {deleting ? (
+                  <>
+                    <div className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    Deleting...
+                  </>
+                ) : (
+                  "Delete"
+                )}
               </button>
             </div>
           </div>
