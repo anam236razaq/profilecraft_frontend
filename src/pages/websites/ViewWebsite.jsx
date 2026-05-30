@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import websitesAPI from "../../api/websites";
+import { SkeletonPage } from "../../components/Skeleton";
 
 const ViewWebsite = () => {
   const { id } = useParams();
@@ -51,11 +52,7 @@ const ViewWebsite = () => {
   }, [id]);
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-gray-500">Loading...</div>
-      </div>
-    );
+    return <SkeletonPage />;
   }
 
   if (error || !website) {
