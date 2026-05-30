@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useToast } from "../../context/ToastContext";
-import { SkeletonCard } from "../../components/Skeleton";
+import { SkeletonListItem } from "../../components/Skeleton";
 import websitesAPI from "../../api/websites";
 
 const Websites = () => {
@@ -72,10 +72,10 @@ const Websites = () => {
         </div>
 
         {loading ? (
-          <div className="grid md:grid-cols-3 gap-6">
-            <SkeletonCard />
-            <SkeletonCard />
-            <SkeletonCard />
+          <div className="space-y-4">
+            <SkeletonListItem />
+            <SkeletonListItem />
+            <SkeletonListItem />
           </div>
         ) : websites.length === 0 ? (
           <div className="text-center py-12 bg-white rounded-xl shadow">

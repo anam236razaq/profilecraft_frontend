@@ -5,6 +5,7 @@ import templatesAPI from "../api/templates";
 import socialAPI from "../api/social";
 import websitesAPI from "../api/websites";
 import api from "../api/axios";
+import { SkeletonPage } from "../components/Skeleton";
 
 const CreateWebsite = () => {
   const navigate = useNavigate();
@@ -70,7 +71,6 @@ const CreateWebsite = () => {
       const profile = profileRes.data.data?.account;
 
       // If profile_url is missing and this is a Google account, retry once after a short delay
-      // (Google有时候需要一点时间才能返回profile_image_url)
       if (!profile?.profile_image_url && retryCount === 0 && profile?.provider === 'google') {
         setTimeout(() => {
           fetchSocialData(accountId, 1);
@@ -590,19 +590,11 @@ const CreateWebsite = () => {
   };
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-gray-500">Loading...</div>
-      </div>
-    );
+    return <SkeletonPage />;
   }
 
   if (loadingSocial) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-gray-500">Loading social data...</div>
-      </div>
-    );
+    return <SkeletonPage />;
   }
 
   return (
