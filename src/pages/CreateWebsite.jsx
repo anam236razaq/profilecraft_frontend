@@ -594,7 +594,7 @@ const CreateWebsite = () => {
   }
 
   if (loadingSocial) {
-    return <SkeletonPage />;
+    return;
   }
 
   return (
