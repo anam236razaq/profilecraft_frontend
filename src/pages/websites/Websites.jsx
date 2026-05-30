@@ -8,6 +8,7 @@ const Websites = () => {
   const toast = useToast();
   const [websites, setWebsites] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [deleting, setDeleting] = useState(false);
   const [deleteModal, setDeleteModal] = useState({
     open: false,
     websiteId: null,
@@ -37,6 +38,7 @@ const Websites = () => {
 
   const handleConfirmDelete = async () => {
     if (!deleteModal.websiteId) return;
+    setDeleting(true);
     try {
       await websitesAPI.delete(deleteModal.websiteId);
       setWebsites(websites.filter((w) => w.id !== deleteModal.websiteId));
@@ -46,6 +48,8 @@ const Websites = () => {
       toast.error("Failed to delete website");
       console.error("Failed to delete website", err);
       setDeleteModal({ open: false, websiteId: null });
+    } finally {
+      setDeleting(false);
     }
   };
 
@@ -158,15 +162,24 @@ const Websites = () => {
             <div className="flex gap-3 px-6 py-4 bg-gray-50 border-t border-gray-100">
               <button
                 onClick={handleCancelDelete}
-                className="flex-1 px-4 py-2 bg-white border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition"
+                disabled={deleting}
+                className="flex-1 px-4 py-2 bg-white border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition disabled:opacity-60 disabled:cursor-not-allowed"
               >
                 Cancel
               </button>
               <button
                 onClick={handleConfirmDelete}
-                className="flex-1 px-4 py-2 bg-red-600 text-white font-medium rounded-lg hover:bg-red-700 transition"
+                disabled={deleting}
+                className="flex-1 px-4 py-2 bg-red-600 text-white font-medium rounded-lg hover:bg-red-700 transition disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
-                Delete
+                {deleting ? (
+                  <>
+                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    Deleting...
+                  </>
+                ) : (
+                  "Delete"
+                )}
               </button>
             </div>
           </div>
