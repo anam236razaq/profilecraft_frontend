@@ -589,7 +589,11 @@ const CreateWebsite = () => {
     return value.toLowerCase().replace(/[^a-z0-9-]/g, "");
   };
 
-  if (loading && loadingSocial) {
+  if (loading) {
+    return <SkeletonPage />;
+  }
+
+  if (loadingSocial) {
     return <SkeletonPage />;
   }
 
